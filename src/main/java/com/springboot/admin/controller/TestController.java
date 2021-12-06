@@ -20,4 +20,9 @@ public class TestController {
         return userService.getCounts();
     }
 
+    @GetMapping("aaa")
+    public String aaa() throws Exception {
+        return "aaa";
+    }
+
 }
