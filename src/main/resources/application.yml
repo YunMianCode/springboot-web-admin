@@ -79,6 +79,6 @@ xxl:
       logretentiondays: 30
       appname: xxl-job-admin
     admin:
-      addresses: http://127.0.0.1:8080/xxl-job-admin
+      addresses: http://127.0.0.1:8086/xxl-job-admin
     accessToken:
   config: classpath:logback.xml
