@@ -1,6 +1,8 @@
 package com.springboot.admin.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.springboot.admin.common.code.MD5;
+import com.springboot.admin.common.constant.UpmsConstant;
 import com.springboot.admin.common.util.Result;
 import com.springboot.admin.dao.UserMapper;
 import com.springboot.admin.model.User;
@@ -21,14 +23,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         return baseMapper.getByName(userName);
     }
 
-//    @Override
-//    public User getByLoginName(String loginName) {
-//        User user =baseMapper.getByLoginName(loginName);
-//        if(user != null){
-//            return user;
-//        }
-//    }
-
     @Override
     public boolean isValidatePwd(String password) {
         return false;
@@ -44,7 +38,25 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     public Result add(User user) {
 //        int i = 10 / 0;
 //        int counts = userService.getCounts();
-        baseMapper.insert(user);
-        return Result.success();
+        String pwd = getPassword(user);
+        user.setPassword(pwd);
+        User byUsername = userService.getByUsername(user);
+        if(byUsername != null){
+            return Result.duplicateName();
+        }else{
+            user.setStatus(1);
+            baseMapper.insert(user);
+            return Result.success("添加成功");
+        }
     }
+
+    public String getPassword(User user){
+        String pwd = UpmsConstant.PREFIX_MD5 + user.getPassword();
+        return MD5.getMD5(pwd);
+    }
+
+    public User getByUsername(User user){
+        return baseMapper.getByName(user.getUserName());
+    }
+
 }

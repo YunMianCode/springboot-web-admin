@@ -189,7 +189,7 @@ public class UpmsConstant {
     /**
      * md5加密前缀
      */
-    public static final String PASS_PREFIX_MD5 = "Nxwlt@21_";
+    public static final String PREFIX_MD5 = "YunMian_";
 
     // 数据库数据状态 -- 有效
     public static final String IS_VALID_YES = "1";

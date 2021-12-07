@@ -11,6 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -28,11 +31,13 @@ public class LoginServiceImpl implements LoginService {
     @Autowired
     StringRedisTemplate stringRedisTemplate;
 
+    @Autowired
+    private LoginService loginService;
+
     @Override
     public User doLogin(User user) {
-
         String username = user.getUserName();
-        String password = user.getPassword();
+        String password = userService.getPassword(user);
         /*
          * 非空判断
          */
@@ -43,9 +48,7 @@ public class LoginServiceImpl implements LoginService {
         if (StringUtils.isBlank(password)) {
             throw new RuntimeException("用户名或密码不能为空！");
         }
-
         User dbuser = userService.getByName(username);
-
         if(dbuser != null) {
             boolean flag = password.equals(dbuser.getPassword());
             if(flag){
@@ -66,18 +69,33 @@ public class LoginServiceImpl implements LoginService {
      * @return
      */
     @Override
-    public User login(User user) {
-        if (user.getUserName().equals("dlf")) {      //模仿从数据库中根据username查询密码  然后验证密码是否正确
-            if (user.getPassword().equals("dlf")) {
-                return user;
+    public Result login(User user, HttpServletRequest request) {
+        String username = user.getUserName();
+        String password = user.getPassword();
+        User login_user = new User(username, password);
+        HttpSession session = request.getSession();
+        Map<String, Object> map = loginService.loginUserLock(login_user);   //登录 验证第一层  看用户是否被限制登录
+        if ((Boolean) map.get("flag")) {   //如果为true表示被限制登录
+            session.setAttribute("isLogin","false");
+            return Result.fail("登录失败,因" + username + "超过了限制登录次数,已被禁止登录.还剩" + map.get("lockTime") + "分钟");
+        } else {
+            //表示没有被限制登录   执行 下一步登录逻辑
+            User user1 = loginService.doLogin(user);
+            //执行登录功能
+            if (user1 != null) {
+                //表示密码正确  登录成功  清空对应的所有key
+                loginService.DeleteMemory(getMessage.getLoginCountFailKey(user));
+                loginService.DeleteMemory(getMessage.getLoginTimeLockKey(user));
+                loginService.DeleteMemory(getMessage.getKeyName(user));
+                log.info("{}登陆成功",user1.getUserName());
+                session.setAttribute("isLogin","true");
+                return Result.success("登录成功");
+            } else {
+                //登录不成功   计入登录此时 等逻辑操作
+                session.setAttribute("isLogin","true");
+                return loginService.loginValdate(user);
             }
         }
-        return null;
-    }
-
-    @Override
-    public String loginValdata(User user) {
-        return null;
     }
 
     /**
@@ -116,8 +134,7 @@ public class LoginServiceImpl implements LoginService {
         //记录登录错误次数的key
         String key = getMessage.getLoginCountFailKey(user);
         if (!stringRedisTemplate.hasKey(key)) {   //如果不存在
-            //是第一次登录失败 次数为1
-            // userlogincountfile;用户名进行赋值   同时设置失效期2分钟
+            //是第一次登录失败 次数为1   userlogincountfile;用户名进行赋值   同时设置失效期2分钟
             stringRedisTemplate.opsForValue().set(key, "1", 5, TimeUnit.MINUTES);
             return Result.fail("登录失败,在5分钟内还允许输入错误" + (num - 1) + "次");
         } else {
@@ -129,7 +146,8 @@ public class LoginServiceImpl implements LoginService {
                 stringRedisTemplate.opsForValue().increment(key, 1);
                 long secends = stringRedisTemplate.getExpire(key, TimeUnit.SECONDS);  //返回的是秒
                 return Result.fail(user.getUserName() + "登录失败,在" + secends + "秒内还允许输入错误" + (num - loginFilCount - 1) + "次");
-            } else {   //超过了指定的登录次数
+            } else {
+                //超过了指定的登录次数
                 String lockkey = getMessage.getLoginTimeLockKey(user);
                 stringRedisTemplate.boundValueOps("key");//可以实现绑定某个类型的key
                 stringRedisTemplate.opsForValue().set(lockkey, "1", 1, TimeUnit.HOURS);

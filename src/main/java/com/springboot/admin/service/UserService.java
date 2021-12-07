@@ -16,4 +16,8 @@ public interface UserService extends IService<User> {
 
     Result add(User user);
 
+    String getPassword(User user);
+
+    User getByUsername(User user);
+
 }

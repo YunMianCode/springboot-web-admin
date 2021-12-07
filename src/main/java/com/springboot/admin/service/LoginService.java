@@ -3,6 +3,9 @@ package com.springboot.admin.service;
 
 import com.springboot.admin.common.util.Result;
 import com.springboot.admin.model.User;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.Map;
 
 
@@ -20,16 +23,8 @@ public interface LoginService {
      * @param user
      * @return
      */
-    User login(User user);
+    Result login(User user, HttpServletRequest request);
 
-    /**
-     * 用户在2分钟内 仅允许输入错误密码五次,如果超过次数,限制其登录一小时
-     *
-     * 给用户详细信息提示
-     * @param user
-     * @return
-     */
-    String loginValdata(User user);
 
     /**
      * 判断当前的登录用户是否被限制登录

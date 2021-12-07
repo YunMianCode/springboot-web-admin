@@ -93,7 +93,7 @@ public class CodeUtil {
      */
     public static Boolean pwdAuth(String pwd, String db_pwd, String loginName) {
 
-        String de_db_pwd = MD5.getMD5(UpmsConstant.PASS_PREFIX_MD5 + loginName + pwd);
+        String de_db_pwd = MD5.getMD5(UpmsConstant.PREFIX_MD5 + loginName + pwd);
         //
         Locale.setDefault(Locale.ENGLISH);
         //如果密码相等
