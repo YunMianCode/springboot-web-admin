@@ -8,7 +8,7 @@
 		<version>2.5.6</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.</groupId>
+	<groupId>com.admin</groupId>
 	<artifactId>springboot-web-admin</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>springboot-web-admin</name>
@@ -22,6 +22,11 @@
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger-ui</artifactId>
+			<version>2.9.2</version>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
 			<version>2.9.2</version>
 		</dependency>
 
@@ -43,11 +48,7 @@
 			<version>2.3.0</version>
 		</dependency>
 
-		<dependency>
-			<groupId>io.springfox</groupId>
-			<artifactId>springfox-swagger2</artifactId>
-			<version>2.9.2</version>
-		</dependency>
+
 
 
 		<dependency>
