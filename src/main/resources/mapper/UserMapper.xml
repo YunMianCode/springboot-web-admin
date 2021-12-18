@@ -49,6 +49,13 @@
         user
     </select>
 
+    <select id="deleteByUserId" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        update
+        user a
+        set a.STATUS = 0
+        where a.USER_ID = #{userId}
+    </select>
+
 
 
 </mapper>

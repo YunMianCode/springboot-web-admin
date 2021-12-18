@@ -1,2 +1,2 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-    com.springboot.admin.config.MyLogAutoConfiguration
+#org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+#    com.springboot.admin.config.MyLogAutoConfiguration

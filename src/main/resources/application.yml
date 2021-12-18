@@ -69,16 +69,16 @@ rsa:
   #rsa公钥指数
   privateExponent: 7378560923641526151975934580388360022920363176786022209275539962459481470166575565097388512879929220403804580905808353199687552093200830401468286609727129317426388272720408732865327212492031504537174627353565836399714130877312367270078675873457238393131297760481646897679890451976277495690071028209049608193
 
-xxl:
-  job:
-    executor:
-      logpath: /data/applogs/xxl-job/jobhandler
-      port: 9999
-      ip:
-      address:
-      logretentiondays: 30
-      appname: xxl-job-admin
-    admin:
-      addresses: http://127.0.0.1:8086/xxl-job-admin
-    accessToken:
-  config: classpath:logback.xml
+#xxl:
+#  job:
+#    executor:
+#      logpath: /data/applogs/xxl-job/jobhandler
+#      port: 9999
+#      ip:
+#      address:
+#      logretentiondays: 30
+#      appname: xxl-job-admin
+#    admin:
+#      addresses: http://127.0.0.1:8086/xxl-job-admin
+#    accessToken:
+#  config: classpath:logback.xml

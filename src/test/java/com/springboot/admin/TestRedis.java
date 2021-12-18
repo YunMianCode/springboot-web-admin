@@ -23,11 +23,11 @@ public class TestRedis {
     public void getString(){
 
         User user = new User();
-        user.setUserID(12);
+        user.setUserId(12);
         user.setUserName("testRedis");
         user.setPassword("testRedis");
         user.setTel("110");
-        user.setStatus(1);
+        user.setStatus("1");
 
         redisTemplate.opsForValue().set("user",user);
         redisTemplate.opsForValue().set("name","guoan");

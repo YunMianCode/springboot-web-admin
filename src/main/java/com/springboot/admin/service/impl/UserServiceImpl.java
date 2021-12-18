@@ -44,9 +44,21 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         if(byUsername != null){
             return Result.duplicateName();
         }else{
-            user.setStatus(1);
+            user.setStatus("1");
             baseMapper.insert(user);
             return Result.success("添加成功");
+        }
+    }
+
+    @Override
+    public Result delete(User user) {
+        User olduser = baseMapper.selectById(user.getUserId());
+        if(olduser != null){
+            olduser.setStatus("0");
+            baseMapper.deleteById(olduser);
+            return Result.success("删除成功");
+        }else{
+            return Result.fail("删除失败");
         }
     }
 
