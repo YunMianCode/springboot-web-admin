@@ -4,13 +4,10 @@ package com.springboot.admin.controller;
 import com.springboot.admin.common.util.Result;
 import com.springboot.admin.model.User;
 import com.springboot.admin.service.UserService;
-import com.xxl.job.core.context.XxlJobHelper;
-import com.xxl.job.core.handler.annotation.XxlJob;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -54,11 +51,16 @@ public class UserController {
      * 简单类型的校验
      * */
     @PostMapping("testDelete")
-    public String delete(@RequestBody @NotNull(message = "用户id不能为空")  Integer id){
+    public String delete(@RequestBody @NotNull(message = "用户id不能为空") Integer id) {
         System.out.println("delete..." + id);
         return "delete success";
     }
 
+    @PostMapping("testXSS")
+    public Result testXSS(@RequestBody User user) {
+        log.info(user.getUserName());
+        return Result.success();
+    }
 
 
 }

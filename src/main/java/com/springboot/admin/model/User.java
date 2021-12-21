@@ -3,10 +3,7 @@ package com.springboot.admin.model;
 import com.baomidou.mybatisplus.annotation.*;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Primary;
@@ -22,7 +19,8 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @TableName("user")
-@ApiModel(value = "用户实体",description = "图书馆Books实体User")
+@Builder
+@ApiModel(value = "用户实体", description = "图书馆Books实体User")
 public class User implements Serializable {
 
     @TableField(value = "USER_ID")

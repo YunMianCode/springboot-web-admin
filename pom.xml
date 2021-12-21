@@ -37,10 +37,21 @@
 		</dependency>
 		<!--校验依赖-->
 		<dependency>
-              <groupId>org.hibernate</groupId>
-              <artifactId>hibernate-validator</artifactId>
-              <version>6.0.18.Final</version>
-        </dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>6.0.18.Final</version>
+		</dependency>
+		<!--XSS跨域攻击-->
+		<dependency>
+			<groupId>org.owasp.antisamy</groupId>
+			<artifactId>antisamy</artifactId>
+			<version>1.5.7</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ws.esapi</groupId>
+			<artifactId>esapi</artifactId>
+			<version>1.0</version>
+		</dependency>
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>druid</artifactId>
@@ -52,8 +63,6 @@
 			<artifactId>xxl-job-core</artifactId>
 			<version>2.3.0</version>
 		</dependency>
-
-
 
 
 		<dependency>
