@@ -38,9 +38,14 @@ public class UserController {
         return Result.success(stringRedisTemplate.opsForValue().get("USER_COUNTS"));
     }
 
+    @GetMapping("getCounts")
+    public Result getCounts() throws Exception {
+        return Result.success(userService.getCounts());
+    }
+
 
     @PostMapping("add")
-    @ApiOperation(value = "新增用户",response = Result.class,notes = "请注意非空字段")
+    @ApiOperation(value = "新增用户", response = Result.class, notes = "请注意非空字段")
     public Result addUser(@RequestBody @Validated User user) {
         return userService.add(user);
     }

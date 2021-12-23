@@ -22,9 +22,16 @@ spring:
 #  mvc:
 #    static-path-pattern: /static/**
 
+#logging:
+#  #在Spring Boot项目中默认加载类路径下的logback-spring.xml文件
+#  config: classpath:logback-spring.xml
+
 logging:
-  #在Spring Boot项目中默认加载类路径下的logback-spring.xml文件
-  config: classpath:logback-spring.xml
+  level:
+    root: info
+    com:
+      springboot:
+        admin: debug
 
 management:
   endpoints:
