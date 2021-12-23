@@ -30,7 +30,7 @@ public class SwaggerConfig {
         // boolean flag = environment.acceptsProfiles(profiles);
         Docket docket = new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
-                .groupName("yunmian")
+                .groupName("云棉")
                 //enable是否启动swagger，如果为false，则swagger不能在浏览器中访问
                 // .enable(flag)
                 .select()
@@ -47,10 +47,10 @@ public class SwaggerConfig {
      */
     private ApiInfo apiInfo() {
         //作者信息
-        Contact contact = new Contact("wen", "http://localhost:8080", "2586966585@qq.com");
-        return new ApiInfo("云棉 的Api文档 ",
-                "法能治国",
-                "1.0",
+        Contact contact = new Contact("郭安", "http://localhost:8088", "1813850191@qq.com");
+        return new ApiInfo("云棉的API文档 ",
+                "接口文档",
+                "1.0.0",
                 "urn:tos",
                 contact,
                 "Apache 2.0",

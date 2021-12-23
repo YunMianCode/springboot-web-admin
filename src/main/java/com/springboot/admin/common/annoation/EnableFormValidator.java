@@ -8,7 +8,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * 在启动类上添加该注解来启动表单验证功能---快速失败返回模式
+ * 在启动类上添加该注解来启动表单验证功能---快速失败返回模式（hibernate-validator）
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)

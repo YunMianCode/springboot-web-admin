@@ -16,7 +16,7 @@ public class CustomerHandleExceptionResolver implements HandlerExceptionResolver
     @Override
     public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
         try {
-            response.sendError(511,"我自定义的异常处理器");
+            response.sendError(511, "自定义异常处理器");
         } catch (IOException e) {
             e.printStackTrace();
         }

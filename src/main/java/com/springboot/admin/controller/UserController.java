@@ -5,7 +5,8 @@ import com.springboot.admin.common.util.Result;
 import com.springboot.admin.model.User;
 import com.springboot.admin.service.UserService;
 import io.swagger.annotations.ApiOperation;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.validation.annotation.Validated;
@@ -15,7 +16,6 @@ import javax.annotation.Resource;
 import javax.validation.constraints.NotNull;
 
 @RestController
-@Slf4j
 @Validated//开启hibernate-validator校验
 @RequestMapping("/user")
 public class UserController {
@@ -26,8 +26,15 @@ public class UserController {
     @Resource
     private StringRedisTemplate stringRedisTemplate;
 
+    Logger logger = LoggerFactory.getLogger(UserController.class);
+
     @GetMapping("getCountsByCache")
     public Result getCountsByCache() throws Exception {
+        logger.trace("trace...");
+        logger.debug("debug...");
+        logger.info("info...");
+        logger.warn("warn...");
+        logger.error("error...");
         return Result.success(stringRedisTemplate.opsForValue().get("USER_COUNTS"));
     }
 
@@ -58,7 +65,7 @@ public class UserController {
 
     @PostMapping("testXSS")
     public Result testXSS(@RequestBody User user) {
-        log.info(user.getUserName());
+        logger.info(user.getUserName());
         return Result.success();
     }
 

@@ -1,4 +1,4 @@
-package com.zyjc.base.common.util;
+package com.springboot.admin.common.util;
 
 import org.apache.commons.lang3.StringUtils;
 import java.text.SimpleDateFormat;

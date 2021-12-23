@@ -10,16 +10,21 @@ spring:
   redis:
     host: 127.0.0.1
     port: 6379
-  thymeleaf:
-    cache: false
-    prefix:  classpath:/templates/
-    check-template-location: true
-    suffix: .html
-    encoding: utf-8
-    mode: HTML
+  profiles:
+    active: dev
+#  thymeleaf:
+#    cache: false
+#    prefix:  classpath:/templates/
+#    check-template-location: true
+#    suffix: .html
+#    encoding: utf-8
+#    mode: HTML
 #  mvc:
 #    static-path-pattern: /static/**
 
+logging:
+  #在Spring Boot项目中默认加载类路径下的logback-spring.xml文件
+  config: classpath:logback-spring.xml
 
 management:
   endpoints:
@@ -81,4 +86,4 @@ rsa:
 #    admin:
 #      addresses: http://127.0.0.1:8086/xxl-job-admin
 #    accessToken:
-#  config: classpath:logback.xml
+#  config: classpath:logback-base.xml
