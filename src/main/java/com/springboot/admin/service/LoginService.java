@@ -1,11 +1,10 @@
 package com.springboot.admin.service;
 
 
-import com.springboot.admin.common.util.Result;
+import com.springboot.admin.common.result.Result;
 import com.springboot.admin.model.User;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.Map;
 
 

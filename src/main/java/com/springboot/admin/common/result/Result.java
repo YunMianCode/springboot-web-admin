@@ -1,5 +1,6 @@
-package com.springboot.admin.common.util;
+package com.springboot.admin.common.result;
 
+import com.springboot.admin.common.util.BuzCode;
 import lombok.Data;
 
 import java.io.Serializable;

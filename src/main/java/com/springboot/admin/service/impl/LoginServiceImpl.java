@@ -1,14 +1,12 @@
 package com.springboot.admin.service.impl;
 
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
-import com.springboot.admin.common.config.UpmsSystemConfig;
-import com.springboot.admin.common.util.Result;
+import com.springboot.admin.common.result.Result;
 import com.springboot.admin.model.User;
 import com.springboot.admin.service.LoginService;
 import com.springboot.admin.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 

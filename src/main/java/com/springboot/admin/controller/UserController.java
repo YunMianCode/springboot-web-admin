@@ -1,7 +1,9 @@
 package com.springboot.admin.controller;
 
 
-import com.springboot.admin.common.util.Result;
+import com.springboot.admin.common.annoation.OperationLog;
+import com.springboot.admin.common.result.CommonResult;
+import com.springboot.admin.common.result.Result;
 import com.springboot.admin.model.User;
 import com.springboot.admin.service.UserService;
 import io.swagger.annotations.ApiOperation;
@@ -51,10 +53,10 @@ public class UserController {
     }
 
 
-
     @PostMapping("deleteById")
-    @ApiOperation(value = "删除用户",response = Result.class,notes = "该操作为逻辑删除，且传参为用户实体")
-    public Result deleteUser(@RequestBody User user){
+    @ApiOperation(value = "删除用户", response = Result.class, notes = "该操作为逻辑删除，且传参为用户实体")
+    @OperationLog(moduleType = "2", module1 = "教务管理", module2 = "管理员列表", name = "删除管理员")
+    public CommonResult deleteUser(@RequestBody User user) {
         return userService.delete(user);
     }
 

@@ -1,9 +1,9 @@
 package com.springboot.admin.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.springboot.admin.common.util.Result;
+import com.springboot.admin.common.result.CommonResult;
+import com.springboot.admin.common.result.Result;
 import com.springboot.admin.model.User;
-import io.swagger.annotations.ApiOperation;
 
 public interface UserService extends IService<User> {
 
@@ -22,7 +22,7 @@ public interface UserService extends IService<User> {
     Result add(User user);
 
     //删除用户（根据用户Id）
-    Result delete(User user);
+    CommonResult delete(User user);
 
     //获取密码，用户登录操作检验密码正确性
     String getPassword(User user);
